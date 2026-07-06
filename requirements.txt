@@ -1,0 +1,12 @@
+Django>=5.0,<5.1
+Pillow>=10.0.0
+python-dotenv>=1.0.0
+
+# Optional — Production ke liye
+gunicorn>=21.0.0          # Production server (Heroku, DigitalOcean, etc.)
+whitenoise>=6.6.0         # Static files serve karne ke liye production mein
+psycopg2-binary>=2.9.0    # PostgreSQL database ke liye (SQLite ki jagah)
+
+# Optional — Development ke liye
+django-debug-toolbar>=4.0  # Debug karne mein madad karta hai
+django-extensions>=3.2.0    # Extra management commands

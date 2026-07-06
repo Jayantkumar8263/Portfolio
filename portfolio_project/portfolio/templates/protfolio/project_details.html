@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} - {{ config.full_name }}{% endblock %}
+
+{% block content %}
+<section class="pt-5 mt-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none text-primary">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'projects' %}" class="text-decoration-none text-primary">Projects</a></li>
+                <li class="breadcrumb-item active text-secondary" aria-current="page">{{ project.title }}</li>
+            </ol>
+        </nav>
+        
+        <div class="row g-5">
+            <div class="col-lg-8 animate-fade-in">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" class="img-fluid rounded-4 mb-4" alt="{{ project.title }}" style="width: 100%;">
+                {% else %}
+                    <div class="rounded-4 mb-4 d-flex align-items-center justify-content-center" 
+                         style="height: 400px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+                        <i class="bi bi-code-square" style="font-size: 6rem; color: white;"></i>
+                    </div>
+                {% endif %}
+                
+                <div class="card-custom p-4">
+                    <h2 class="fw-bold mb-3">{{ project.title }}</h2>
+                    <div class="text-secondary" style="line-height: 1.8;">
+                        {{ project.description|linebreaks }}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 animate-fade-in delay-1">
+                <div class="card-custom p-4 mb-4">
+                    <h5 class="fw-bold mb-3">Project Info</h5>
+                    
+                    <div class="mb-3">
+                        <small class="text-secondary d-block mb-1">Technologies</small>
+                        <div>
+                            {% for tech in project.get_technologies_list %}
+                                <span class="tech-badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <small class="text-secondary d-block mb-1">Created</small>
+                        <span>{{ project.created_at|date:"F Y" }}</span>
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        {% if project.project_url %}
+                            <a href="{{ project.project_url }}" class="btn btn-primary-custom" target="_blank">
+                                <i class="bi bi-box-arrow-up-right me-2"></i>Live Demo
+                            </a>
+                        {% endif %}
+                        {% if project.github_url %}
+                            <a href="{{ project.github_url }}" class="btn btn-outline-custom" target="_blank">
+                                <i class="bi bi-github me-2"></i>View Code
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="card-custom p-4">
+                    <h5 class="fw-bold mb-3">More Projects</h5>
+                    <a href="{% url 'projects' %}" class="btn btn-outline-custom w-100">
+                        <i class="bi bi-arrow-left me-2"></i>Back to All Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

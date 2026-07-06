@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - {{ config.full_name }}{% endblock %}
+
+{% block content %}
+<section class="pt-5 mt-5">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Get In Touch</h2>
+            <div class="section-line mx-auto"></div>
+            <p class="text-secondary mt-3">Have a project in mind? Let's talk!</p>
+        </div>
+        
+        <div class="row g-5 justify-content-center">
+            <div class="col-lg-5 animate-fade-in">
+                <div class="card-custom p-4 h-100">
+                    <h4 class="fw-bold mb-4">Contact Information</h4>
+                    
+                    {% if config.email %}
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="social-link me-3 flex-shrink-0">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Email</h6>
+                            <a href="mailto:{{ config.email }}" class="text-secondary text-decoration-none">{{ config.email }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if config.phone %}
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="social-link me-3 flex-shrink-0">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Phone</h6>
+                            <span class="text-secondary">{{ config.phone }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if config.location %}
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="social-link me-3 flex-shrink-0">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Location</h6>
+                            <span class="text-secondary">{{ config.location }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <h6 class="fw-bold mb-3">Follow Me</h6>
+                        <div>
+                            {% if config.github_url %}
+                                <a href="{{ config.github_url }}" class="social-link" target="_blank"><i class="bi bi-github"></i></a>
+                            {% endif %}
+                            {% if config.linkedin_url %}
+                                <a href="{{ config.linkedin_url }}" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+                            {% endif %}
+                            {% if config.twitter_url %}
+                                <a href="{{ config.twitter_url }}" class="social-link" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-7 animate-fade-in delay-1">
+                <div class="card-custom p-4">
+                    <h4 class="fw-bold mb-4">Send a Message</h4>
+                    <form method="post" action="{% url 'contact' %}">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Your Name</label>
+                                {{ form.name }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="col-12">
+                                <label for="subject" class="form-label">Subject</label>
+                                {{ form.subject }}
+                            </div>
+                            <div class="col-12">
+                                <label for="message" class="form-label">Message</label>
+                                {{ form.message }}
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary-custom w-100">
+                                    <i class="bi bi-send me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

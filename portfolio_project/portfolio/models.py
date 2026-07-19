@@ -114,8 +114,8 @@ class ContactMessage(models.Model):
 
 class SiteConfig(models.Model):
     """Singleton model for site-wide configuration"""
-    full_name = models.CharField(max_length=100, default="Your Name")
-    title = models.CharField(max_length=100, default="Full Stack Developer")
+    full_name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, default="Full Stack Developer, DevOps Engineer, and Tech Enthusiast")
     tagline = models.CharField(max_length=300, blank=True)
     about_text = models.TextField(blank=True)
     email = models.EmailField(blank=True)

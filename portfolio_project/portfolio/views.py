@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -9,7 +8,7 @@ from .forms import ContactForm
 # Create your views here.
 
 def home(request):
-    config = SiteConfig.get_config()
+    config = SiteConfig.get_config() #
     featured_projects = Project.objects.filter(featured=True)[:3]
     skills = Skill.objects.all()
     
@@ -26,7 +25,7 @@ def home(request):
         'featured_projects': featured_projects,
         'skills_by_category': skills_by_category,
     }
-    return render(request, 'home.html', context)
+    return render(request, 'portfolio/home.html', context)
 
 def about(request):
     config = SiteConfig.get_config()
@@ -40,7 +39,7 @@ def about(request):
         'education_list': education_list,
         'skills': skills,
     }
-    return render(request, 'about.html', context)
+    return render(request, 'portfolio/about.html', context)
 
 def projects(request):
     config = SiteConfig.get_config()
@@ -60,7 +59,7 @@ def project_detail(request, slug):
         'config': config,
         'project': project,
     }
-    return render(request, 'project_detail.html', context)
+    return render(request, 'portfolio/project_detail.html', context)
 
 def contact(request):
     config = SiteConfig.get_config()
@@ -78,9 +77,8 @@ def contact(request):
         'config': config,
         'form': form,
     }
-    return render(request, 'contact.html', context)
+    return render(request, 'portfolio/contact.html', context)
 
 def resume(request):
     config = SiteConfig.get_config()
-    return render(request, 'resume.html', {'config': config})
-
+    return render(request, 'portfolio/resume.html', {'config': config})
